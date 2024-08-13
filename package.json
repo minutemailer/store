@@ -1,0 +1,47 @@
+{
+    "name": "@minutemailer/library",
+    "version": "0.0.1",
+    "description": "A template for library creation",
+    "source": "src/index.js",
+    "main": "dist/main.js",
+    "module": "dist/module.js",
+    "sideEffects": false,
+    "files": [
+        "dist/main.js",
+        "dist/main.js.map",
+        "dist/module.js",
+        "dist/module.js.map"
+    ],
+    "scripts": {
+        "start": "parcel example/index.html --dist-dir output",
+        "watch": "parcel watch",
+        "build": "parcel build",
+        "test": "vitest",
+        "coverage": "vitest --run --coverage"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/minutemailer/utils.git"
+    },
+    "keywords": [
+        "javascript",
+        "library"
+    ],
+    "author": "Minutemailer",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/minutemailer/library/issues"
+    },
+    "homepage": "https://github.com/minutemailer/library#readme",
+    "devDependencies": {
+        "@minutemailer/facade": "^0.2.4",
+        "@parcel/transformer-sass": "^2.8.3",
+        "@vitest/coverage-c8": "^0.29.8",
+        "parcel": "^2.8.3",
+        "prettier": "^2.8.7",
+        "process": "^0.11.10",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "vitest": "^0.29.8"
+    }
+}
