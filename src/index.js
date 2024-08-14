@@ -2,6 +2,24 @@ import { useEffect, useState } from 'react';
 
 const stores = {};
 
+function loadPersistentState(id, key) {
+    try {
+        return JSON.parse(localStorage.getItem(key));
+    } catch (error) {
+        console.error(`Failed to load persistent state for ${id}`, error);
+    }
+
+    return null;
+}
+
+function savePersistentState(id, key, state) {
+    try {
+        localStorage.setItem(key, JSON.stringify(state));
+    } catch (error) {
+        console.error(`Failed to save persistent state for ${id}`, error);
+    }
+}
+
 export function getStore(id) {
     if (!stores[id]) {
         console.warn(`Store ${id} does not exist`, stores);
@@ -16,6 +34,7 @@ export function createStore(
     reducer,
     shouldUpdate = () => true,
     onStateChange = () => {},
+    persistent = false,
 ) {
     if (stores[id]) {
         return stores[id];
@@ -23,6 +42,15 @@ export function createStore(
 
     const listeners = new Set();
     let state = initialState;
+
+    if (persistent) {
+        const persistentState = loadPersistentState(id, `${persistent}.${id}`);
+
+        if (persistentState) {
+            state = persistentState;
+        }
+    }
+
     const subscribe = (listener) => {
         listeners.add(listener);
 
@@ -35,6 +63,10 @@ export function createStore(
         dispatch(action, cb = () => {}) {
             const prevState = state;
             state = reducer(state, action);
+
+            if (persistent) {
+                savePersistentState(id, `${persistent}.${id}`, state);
+            }
 
             if (shouldUpdate(prevState, state)) {
                 listeners.forEach((listener) =>
@@ -69,12 +101,16 @@ export function createStore(
     return stores[id];
 }
 
-export function deleteStore(id) {
+export function deleteStore(id, persistent = false) {
+    if (persistent) {
+        localStorage.removeItem(`${persistent}.${id}`);
+    }
+
     delete stores[id];
 }
 
-export function deleteAllStores(exceptions = []) {
+export function deleteAllStores(exceptions = [], persistent = false) {
     Object.keys(stores)
         .filter((id) => !exceptions.includes(id))
-        .forEach((id) => deleteStore(id));
+        .forEach((id) => deleteStore(id, persistent));
 }
