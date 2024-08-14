@@ -33,14 +33,16 @@
         "url": "https://github.com/minutemailer/store/issues"
     },
     "homepage": "https://github.com/minutemailer/store#readme",
+    "dependencies": {
+        "react": "^18.2.0"
+    },
     "devDependencies": {
-        "@minutemailer/facade": "^0.2.4",
+        "@minutemailer/ui": "^8.3.7",
         "@parcel/transformer-sass": "^2.8.3",
         "@vitest/coverage-c8": "^0.29.8",
         "parcel": "^2.8.3",
         "prettier": "^2.8.7",
         "process": "^0.11.10",
-        "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "vitest": "^0.29.8"
     }

@@ -1,11 +1,25 @@
 import { createRoot } from 'react-dom/client';
-import '@minutemailer/facade/styles/theme.scss';
-import '@minutemailer/facade/styles/foundation.css';
-import Button from '@minutemailer/facade/components/Button';
-import Stack from '@minutemailer/facade/components/Stack';
-import Checkbox from '@minutemailer/facade/components/Checkbox';
-import { Title, Text } from '@minutemailer/facade/components/Typography';
-import Input from '@minutemailer/facade/components/Input';
+
+import '@minutemailer/ui/design-system/scss/theme.scss';
+import '@minutemailer/ui/design-system/scss/style.scss';
+
+import {
+    Layout,
+    Header as LayoutHeader,
+    Content,
+    Main,
+    Sidebar,
+    AppBar,
+    Navigation,
+    Nav,
+    MinutemailerUI,
+    Box,
+} from '@minutemailer/ui';
+import { CheckFilled, PlusBold } from '@minutemailer/ui/ui/icons';
+import Stack from '@minutemailer/ui/ui/components/Stack';
+import Checkbox from '@minutemailer/ui/ui/components/Checkbox';
+import Typography, { Text } from '@minutemailer/ui/ui/components/Typography';
+import Input from '@minutemailer/ui/ui/components/Input';
 import store from './store';
 
 function Todos() {
@@ -42,18 +56,11 @@ function Todos() {
     );
 }
 
-function Header() {
+function Status() {
     const total = store.useSelector((state) => state.total);
     const completed = store.useSelector((state) => state.completed);
 
-    return (
-        <Stack direction="vertical" align="center">
-            <Title>Todo</Title>
-            <Text>
-                {completed} / {total} todos completed
-            </Text>
-        </Stack>
-    );
+    return `${completed} / ${total} todos completed`;
 }
 
 function Form() {
@@ -65,32 +72,49 @@ function Form() {
     }
 
     return (
-        <Stack valign="middle" component="form" gap="xs" onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
             <Input
                 placeholder="Add a new todo"
                 value={currentTodo}
+                icon={<PlusBold />}
+                variant="rounded"
                 onChange={(value) => {
                     store.dispatch({ type: 'SET_CURRENT_TODO', value });
                 }}
             />
-            <Button type="submit">Add</Button>
-        </Stack>
+        </form>
     );
 }
 
 function App() {
     return (
-        <Stack
-            align="center"
-            direction="vertical"
-            valign="middle"
-            height="screen"
-            gap
-        >
-            <Header />
-            <Form />
-            <Todos />
-        </Stack>
+        <MinutemailerUI t={(key) => key}>
+            <Layout>
+                <LayoutHeader>
+                    <AppBar logo={<CheckFilled />}>
+                        <Box expand>
+                            <Status />
+                        </Box>
+                    </AppBar>
+                </LayoutHeader>
+                <Content>
+                    <Main>
+                        <Stack
+                            spaceBetween
+                            valign="bottom"
+                            gap
+                            marginBottom="xs"
+                        >
+                            <Typography variant="title">Todo</Typography>
+                            <Form />
+                        </Stack>
+                        <Box background padding>
+                            <Todos />
+                        </Box>
+                    </Main>
+                </Content>
+            </Layout>
+        </MinutemailerUI>
     );
 }
 
