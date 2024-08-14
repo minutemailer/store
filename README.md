@@ -1,2 +1,2 @@
-# Library template
-A template for library creation.
+# Store
+Global store manager for React

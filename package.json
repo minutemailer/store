@@ -1,7 +1,7 @@
 {
-    "name": "@minutemailer/library",
+    "name": "@minutemailer/store",
     "version": "0.0.1",
-    "description": "A template for library creation",
+    "description": "Global store manager for React",
     "source": "src/index.js",
     "main": "dist/main.js",
     "module": "dist/module.js",
@@ -21,7 +21,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/minutemailer/utils.git"
+        "url": "git+https://github.com/minutemailer/store.git"
     },
     "keywords": [
         "javascript",
@@ -30,9 +30,9 @@
     "author": "Minutemailer",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/minutemailer/library/issues"
+        "url": "https://github.com/minutemailer/store/issues"
     },
-    "homepage": "https://github.com/minutemailer/library#readme",
+    "homepage": "https://github.com/minutemailer/store#readme",
     "devDependencies": {
         "@minutemailer/facade": "^0.2.4",
         "@parcel/transformer-sass": "^2.8.3",
