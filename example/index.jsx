@@ -1,14 +1,12 @@
 import { createRoot } from 'react-dom/client';
-
 import '@minutemailer/facade/styles/theme.scss';
 import '@minutemailer/facade/styles/foundation.css';
 import Button from '@minutemailer/facade/components/Button';
 import Stack from '@minutemailer/facade/components/Stack';
 import Checkbox from '@minutemailer/facade/components/Checkbox';
-import store from './store';
 import { Title, Text } from '@minutemailer/facade/components/Typography';
 import Input from '@minutemailer/facade/components/Input';
-import { useState } from 'react';
+import store from './store';
 
 function Todos() {
     const todos = store.useSelector((state) => state.todos);
