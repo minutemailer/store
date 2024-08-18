@@ -1,6 +1,6 @@
 {
     "name": "@minutemailer/store",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Global store manager for React",
     "source": "src/index.js",
     "main": "dist/main.js",
