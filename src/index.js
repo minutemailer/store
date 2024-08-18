@@ -60,6 +60,14 @@ export function createStore(
     };
 
     stores[id] = {
+        reset(persistent = false) {
+            listeners.clear();
+            state = initialState;
+
+            if (persistent) {
+                localStorage.removeItem(`${persistent}.${id}`);
+            }
+        },
         dispatch(action, cb = () => {}) {
             const prevState = state;
             state = reducer(state, action);
@@ -107,6 +115,13 @@ export function deleteStore(id, persistent = false) {
     }
 
     delete stores[id];
+}
+
+export function resetAllStores(exceptions = [], persistent = false) {
+    Object.keys(stores)
+        .filter((id) => !exceptions.includes(id))
+        .forEach((id) => stores[id].reset(persistent));
+    }
 }
 
 export function deleteAllStores(exceptions = [], persistent = false) {
