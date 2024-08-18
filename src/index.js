@@ -121,7 +121,6 @@ export function resetAllStores(exceptions = [], persistent = false) {
     Object.keys(stores)
         .filter((id) => !exceptions.includes(id))
         .forEach((id) => stores[id].reset(persistent));
-    }
 }
 
 export function deleteAllStores(exceptions = [], persistent = false) {
